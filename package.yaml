@@ -1,0 +1,107 @@
+# This YAML file describes your package. Stack will automatically generate a
+# Cabal file when you run `stack build`. See the hpack website for help with
+# this file: <https://github.com/sol/hpack>.
+category: Other
+synopsis: Generate mazes.
+description: |
+  Miro is a maze generator that outputs to ASCII/Unicode. It is inspired by the
+  book /Mazes for Programmers/ (2015) by Jamis Buck. The name /miro/ comes from
+  the Sino-Korean /미로/ (迷路), which means /maze/.
+license: BSD2
+license-file: LICENSE
+author: Linus Arver
+maintainer: linus@ucla.edu
+copyright: (c) 2016-2017 Linus Arver <linus@ucla.edu>
+name: miro
+version: '0.1.0'
+benchmarks:
+  perf:
+    dependencies:
+    - base
+    - miro
+    - criterion
+    - deepseq
+    - pcg-random
+    ghc-options:
+    - -rtsopts
+    - -threaded
+    - -with-rtsopts=-N
+    main: Main.hs
+    source-dirs: bench
+executables:
+  miro:
+    dependencies:
+    - base
+    - miro
+    - gitrev
+    - optparse-applicative
+    - pcg-random
+    ghc-options:
+    - -rtsopts
+    - -threaded
+    - -with-rtsopts=-N
+    main: Main.hs
+    source-dirs: app
+extra-source-files:
+- CHANGELOG.md
+- LICENSE
+- package.yaml
+- README.md
+- stack.yaml
+ghc-options: -Wall -Werror
+github: listx/miro
+library:
+  dependencies:
+  - base
+  - containers
+  - optparse-applicative
+  - pcg-random
+  - pretty-show
+  - safe
+  source-dirs: lib
+tests:
+  core:
+    dependencies:
+    - base
+    - miro
+    - QuickCheck
+    - smallcheck
+    - tasty
+    - tasty-golden
+    - tasty-hunit
+    - tasty-program
+    - tasty-quickcheck
+    - tasty-smallcheck
+    - tasty-th
+    ghc-options:
+    - -rtsopts
+    - -threaded
+    - -with-rtsopts=-N
+    main: Main.hs
+    source-dirs:
+    - test
+  lint:
+    dependencies:
+    - base
+    - ansi-terminal
+    - hlint
+    ghc-options:
+    - -rtsopts
+    - -threaded
+    - -with-rtsopts=-N
+    main: lint.hs
+    source-dirs:
+    - test
+  doc-coverage:
+    dependencies:
+    - base
+    - ansi-terminal
+    - process
+    - regex-compat
+    ghc-options:
+    - -rtsopts
+    - -threaded
+    - -with-rtsopts=-N
+    main: doc-coverage.hs
+    source-dirs:
+    - test

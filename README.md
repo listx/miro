@@ -1,4 +1,4 @@
-# [miro][]
+# [Miro][]
 
 [![Build Status](https://travis-ci.org/listx/miro.svg?branch=master)](https://travis-ci.org/listx/miro)
 

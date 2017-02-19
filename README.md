@@ -3,8 +3,9 @@
 [![Build Status](https://travis-ci.org/listx/miro.svg?branch=master)](https://travis-ci.org/listx/miro)
 
 Miro is a maze generator that outputs to ASCII/Unicode. It is inspired by the
-book *Mazes for Programmers* (2015) by Jamis Buck. The name *miro* comes from
-the Sino-Korean *미로* (迷路), which means *maze*.
+book *[Mazes for Programmers](http://www.mazesforprogrammers.com/)* (2015) by
+Jamis Buck. The name *miro* comes from the Sino-Korean *미로* (迷路), which
+means *maze*.
 
 # Install
 
@@ -73,6 +74,10 @@ Buck's book. In part this means porting Buck's Ruby code to Haskell.
 I will politely decline pull requests that deal with adding new algorithms
 because I want to do that part myself as a learning exercise. But if you have
 fixes for obvious mistakes, please let me know!
+
+# Links
+
+- [Release Notes](https://github.com/listx/miro/tree/master/relnotes)
 
 [miro]: https://github.com/listx/miro
 [stack]: https://docs.haskellstack.org

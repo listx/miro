@@ -1,5 +1,7 @@
 # [miro][]
 
+[![Build Status](https://travis-ci.org/listx/miro.svg?branch=master)](https://travis-ci.org/listx/miro)
+
 Miro is a maze generator that outputs to ASCII/Unicode. It is inspired by the
 book /Mazes for Programmers/ (2015) by Jamis Buck. The name /miro/ comes from
 the Sino-Korean /미로/ (迷路), which means /maze/.

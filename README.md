@@ -11,6 +11,10 @@ the Sino-Korean *미로* (迷路), which means *maze*.
 Miro uses [stack][]. After installing Stack, run `stack build` in the root of
 this repo.
 
+## Haddock
+
+Run `stack haddock`.
+
 # Examples
 
 ```

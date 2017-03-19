@@ -1,6 +1,7 @@
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE TemplateHaskell #-}
 
+import Data.Monoid ((<>))
 import Data.Version (showVersion)
 import Data.Word
 import Development.GitRev (gitHash)

@@ -15,6 +15,7 @@ module Miro.Option where
 
 import Control.Monad
 import Data.List
+import Data.Monoid ((<>))
 import Data.Word
 import Options.Applicative
 --import qualified Text.Show.Pretty as Pr

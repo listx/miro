@@ -13,7 +13,7 @@ import Test.Tasty.TH
 import Miro.Maze
 import Miro.Output
 
-data StringGrid = StringGrid [String]
+newtype StringGrid = StringGrid [String]
   deriving (Eq, Ord, Show)
 
 stringGrid :: Int -> [String]

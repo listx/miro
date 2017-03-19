@@ -32,6 +32,8 @@ main = do
     = Opts
     <$> optMazeTypeParser
     <*> optOutputParser
+    <*> optSvgFilenameParser
+    <*> optSvgWidthParser
     <*> optSeedParser randSeed
     <*> optSizeParser
     <*> optQuietParser

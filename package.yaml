@@ -52,6 +52,9 @@ library:
   dependencies:
   - base
   - containers
+  - diagrams
+  - diagrams-lib
+  - diagrams-svg
   - optparse-applicative
   - pcg-random
   - pretty-show

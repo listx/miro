@@ -212,6 +212,10 @@ go cDelta (x, y) = case cDelta of
   DEast -> (x + 1, y)
   DWest -> (x - 1, y)
 
+-- | Check if a Coord is out of bounds.
+oob :: Coord -> Bool
+oob (x, y) = x < 0 || y < 0
+
 data CoordDelta
   = DNorth
   | DSouth

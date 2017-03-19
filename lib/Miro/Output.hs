@@ -13,14 +13,19 @@ Maze rendering utilities.
 
 module Miro.Output where
 
+import Control.Arrow
+import qualified Data.Map.Strict as M
 import Data.Maybe
 import qualified Data.Set as S
+import Diagrams.Backend.SVG
+import Diagrams.Prelude
 
 import Miro.Maze
 
 data Output
   = OAscii
   | OUnicode
+  | OSVG
   deriving (Enum, Eq, Show)
 
 printGridAscii :: Grid -> IO ()
@@ -28,6 +33,46 @@ printGridAscii = putStr . gridToAscii
 
 printGridUnicode :: Grid -> IO ()
 printGridUnicode = putStr . asciiToUnicode . gridToAscii
+
+printGridSvg :: FilePath -> Int -> Grid -> IO ()
+printGridSvg fp w g = renderSVG fp (mkWidth $ fromIntegral w) (gridToSvg g)
+
+gridToSvg :: Grid -> QDiagram SVG V2 Double Any
+gridToSvg g@Grid{..}
+  = frame 0.5
+  . position
+  . map (first coordToPoint)
+  . M.toList
+  $ M.map (cellToSvg g) gCells
+  where
+  coordToPoint :: Coord -> Point V2 Double
+  coordToPoint (x, y) = p2 (fromIntegral x, fromIntegral y)
+
+cellToSvg :: Grid -> Cell -> Diagram B
+cellToSvg Grid{..} Cell{..}
+  = mconcat $ map (# lw thin)
+    [ northWall
+    , eastWall
+    , southWall
+    , westWall
+    ]
+  where
+  northCoord = go DNorth cCoord
+  eastCoord = go DEast cCoord
+  southCoord = go DSouth cCoord
+  westCoord = go DWest cCoord
+  southWall
+    | oob southCoord = fromOffsets [unitX]
+    | otherwise = mempty
+  westWall
+    | oob westCoord = fromOffsets [unitY]
+    | otherwise = mempty
+  northWall
+    | S.member northCoord cLinks = mempty
+    | otherwise = fromOffsets [unitX] # translateY 1
+  eastWall
+    | S.member eastCoord cLinks = mempty
+    | otherwise = fromOffsets [unitY] # translateX 1
 
 validCoord :: Coord -> [String] -> Bool
 validCoord (x, y) rows

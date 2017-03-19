@@ -26,6 +26,8 @@ import Miro.Output
 data Opts = Opts
   { optMazeType :: MazeType
   , optOutput :: Output
+  , optSvgFilename :: FilePath
+  , optSvgWidth :: Int
   , optSeed :: (Word64, Word64)
   , optSize :: (Int, Int)
   , optQuiet :: Bool
@@ -63,6 +65,26 @@ optOutputParser = option parseShowOptable
   <> help ("Output type. " ++ allVals OAscii)
   )
 
+optSvgFilenameParser :: Parser FilePath
+optSvgFilenameParser = option auto
+  ( long "svg-filename"
+  <> short 'f'
+  <> value "miro.svg"
+  <> showDefault
+  <> metavar "FILENAME"
+  <> help "Filename for rendered output."
+  )
+
+optSvgWidthParser :: Parser Int
+optSvgWidthParser = option auto
+  ( long "svg-width"
+  <> short 'w'
+  <> value 1000
+  <> showDefault
+  <> metavar "WIDTH"
+  <> help "Width (in pixels) of SVG output."
+  )
+
 optSeedParser :: (Word64, Word64) -> Parser (Word64, Word64)
 optSeedParser randSeed = option auto
   ( long "rng-seed"
@@ -98,6 +120,7 @@ generateMaze o@Opts{..} = do
   case optOutput of
     OAscii -> printGridAscii maze
     OUnicode -> printGridUnicode maze
+    OSVG -> printGridSvg optSvgFilename optSvgWidth maze
   when (not optQuiet) $ showMazeInfo o
   where
   g = initGrid optSize
@@ -133,6 +156,7 @@ instance ShowOpt Output where
   showOpt a = case a of
     OAscii -> "ascii"
     OUnicode -> "unicode"
+    OSVG -> "svg"
 
 usageAllVals :: (Enum a, ShowOpt a) => a -> String
 usageAllVals a = unwords

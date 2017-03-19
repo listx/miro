@@ -45,4 +45,3 @@ main = do
     s1 <- uniform rng :: IO Word64
     s2 <- uniform rng :: IO Word64
     return (s1, s2)
-

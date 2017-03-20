@@ -32,9 +32,13 @@ main = do
       exitFailure
   where
   printDocCoverage output = do
+    setSGR [SetColor Foreground Dull Yellow]
     putStrLn "--- BEGIN Documentation coverage ---"
+    setSGR []
     putStr . unlines . map ("  "++) $ lines output
+    setSGR [SetColor Foreground Dull Yellow]
     putStrLn "--- END   Documentation coverage ---"
+    setSGR []
 
 match :: String -> [Int]
 match = fmap read . concat . catMaybes . fmap f . lines

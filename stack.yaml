@@ -16,7 +16,16 @@
 #  name: custom-snapshot
 #  location: "./custom-snapshot.yaml"
 resolver: lts-8.2
-
+nix:
+  enable: true
+  shell-file: shell.nix
+  nix-shell-options: []
+  path: []
+  # Our doc-test program uses "stack" binary to generate haddock documentation
+  # and grep for the output. Because of this, we cannot use a pure environment
+  # because otherwise the stack binary cannot be found.
+  pure: false
+  add-gc-roots: false
 # User packages to be built.
 # Various formats can be used as shown in the example below.
 #

@@ -15,7 +15,7 @@
 # resolver:
 #  name: custom-snapshot
 #  location: "./custom-snapshot.yaml"
-resolver: lts-8.2
+resolver: lts-8.5
 nix:
   enable: true
   shell-file: shell.nix

@@ -9,9 +9,12 @@
 # named .travis.yml
 
 # Use new container infrastructure to enable caching
-sudo: false
+sudo: required
 
-language: nix
+services:
+  - docker
+
+language: generic
 
 # Caching so the next build will be fast too.
 cache:
@@ -29,6 +32,7 @@ before_install:
 - mkdir -p ~/.local/bin
 - export PATH=$HOME/.local/bin:$PATH
 - travis_retry curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+- stack docker pull
 
 install:
 # Build dependencies
@@ -36,4 +40,4 @@ install:
 
 script:
 # Build the package, its tests, and its docs and run the tests
-- stack --no-terminal test --haddock --no-haddock-deps
+- stack --no-terminal test --no-haddock-deps

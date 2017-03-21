@@ -15,7 +15,7 @@ expected = 5
 
 main :: IO ()
 main = do
-  (_, sout, serr) <- readProcessWithExitCode "stack" ["haddock"] ""
+  (_, sout, serr) <- readProcessWithExitCode "stack" ["haddock", "--no-haddock-deps"] ""
   let
     output = sout ++ serr
   printDocCoverage output
